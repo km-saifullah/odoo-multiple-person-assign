@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Order</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul>
+        <li>Dashboard</li>
+        <li>Sales</li>
+        <li class="active">Operation</li>
+        <li>Requisition</li>
+        <li>Employee Information</li>
+        <li>Logout</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>Create Order</h2>
+
+      <div class="section">
+        <h3>Order Details</h3>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="orderDate" />
+        </div>
+        <div class="form-group">
+          <label>Order Status</label>
+          <select id="orderStatus">
+            <option value="NRA">NRA</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Order ID</label>
+          <input type="text" id="orderId" />
+        </div>
+        <div class="form-group">
+          <label>Assign Name</label>
+          <input type="text" id="assignName" />
+        </div>
+        <div class="form-group">
+          <label>Client ID</label>
+          <input type="text" id="clientId" />
+        </div>
+        <div class="form-group">
+          <label>Order Link</label>
+          <input type="text" id="orderLink" />
+        </div>
+        <div class="form-group">
+          <label>Profile Name</label>
+          <input type="text" id="profileName" value="App_Cake" />
+        </div>
+        <div class="form-group">
+          <label>Instructions Sheet List</label>
+          <input type="text" id="instructions" />
+        </div>
+        <div class="form-group">
+          <label>Delivery Amount</label>
+          <input type="number" id="deliveryAmount" value="500" />
+        </div>
+        <div class="form-group">
+          <label>Special Remarks</label>
+          <textarea id="remarks"></textarea>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Employees</h3>
+        <button class="btn" onclick="addEmployeeRow()">+ Add Employee</button>
+        <table id="employeeTable">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Monetary Value</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p><strong>Total:</strong> <span id="totalValue">0</span></p>
+      </div>
+
+      <button class="btn" onclick="submitOrder()">Submit</button>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
