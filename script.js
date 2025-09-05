@@ -2,7 +2,7 @@ let employeesData = [];
 let employeeRows = [];
 
 // Load employee data
-fetch("./employee.json")
+fetch("employee.json")
   .then((res) => res.json())
   .then((data) => {
     employeesData = data;
@@ -17,10 +17,12 @@ function addEmployeeRow() {
     <td><input type="text" class="empName" readonly></td>
     <td><input type="text" class="companyName" readonly></td>
     <td><input type="number" class="monetaryValue"></td>
+    <td><button class="delete-btn">X</button></td>
   `;
 
   tbody.appendChild(row);
 
+  // Event: Fill employee info when ID entered
   const empIdInput = row.querySelector(".empId");
   empIdInput.addEventListener("change", function () {
     const emp = employeesData.find((e) => e.id === this.value);
@@ -33,8 +35,17 @@ function addEmployeeRow() {
     }
   });
 
+  // Event: Update total when monetary value changes
   const monetaryInput = row.querySelector(".monetaryValue");
   monetaryInput.addEventListener("input", updateTotal);
+
+  // Event: Delete row
+  const deleteBtn = row.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", function () {
+    row.remove();
+    employeeRows = employeeRows.filter((r) => r !== row);
+    updateTotal();
+  });
 
   employeeRows.push(row);
 }
@@ -44,6 +55,7 @@ function updateTotal() {
     document.getElementById("deliveryAmount").value
   );
   let total = 0;
+
   employeeRows.forEach((row) => {
     const val = parseFloat(row.querySelector(".monetaryValue").value) || 0;
     total += val;
@@ -51,15 +63,21 @@ function updateTotal() {
 
   if (total > deliveryAmount) {
     alert("Total monetary value cannot exceed delivery amount!");
-    this.value = "";
-    updateTotal();
-    return;
   }
 
   document.getElementById("totalValue").textContent = total;
 }
 
 function submitOrder() {
+  // Validate all employees have monetary value
+  for (const row of employeeRows) {
+    const monetary = row.querySelector(".monetaryValue").value;
+    if (!monetary || parseFloat(monetary) <= 0) {
+      alert("Each employee must have a valid monetary value!");
+      return;
+    }
+  }
+
   const order = {
     orderDate: document.getElementById("orderDate").value,
     orderStatus: document.getElementById("orderStatus").value,

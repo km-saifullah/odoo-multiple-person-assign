@@ -74,10 +74,21 @@ th,
 td {
   padding: 10px;
 }
-.empId,
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background: darkred;
+}
 .empName,
+.empId,
 .companyName,
 .monetaryValue {
-  width: 250px;
+  width: 240px;
   height: 100%;
 }
