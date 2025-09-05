@@ -1,7 +1,6 @@
 let employeesData = [];
 let employeeRows = [];
 
-// Load employee data
 fetch("employee.json")
   .then((res) => res.json())
   .then((data) => {
@@ -22,7 +21,6 @@ function addEmployeeRow() {
 
   tbody.appendChild(row);
 
-  // Event: Fill employee info when ID entered
   const empIdInput = row.querySelector(".empId");
   empIdInput.addEventListener("change", function () {
     const emp = employeesData.find((e) => e.id === this.value);
@@ -35,11 +33,9 @@ function addEmployeeRow() {
     }
   });
 
-  // Event: Update total when monetary value changes
   const monetaryInput = row.querySelector(".monetaryValue");
   monetaryInput.addEventListener("input", updateTotal);
 
-  // Event: Delete row
   const deleteBtn = row.querySelector(".delete-btn");
   deleteBtn.addEventListener("click", function () {
     row.remove();
@@ -69,7 +65,6 @@ function updateTotal() {
 }
 
 function submitOrder() {
-  // Validate all employees have monetary value
   for (const row of employeeRows) {
     const monetary = row.querySelector(".monetaryValue").value;
     if (!monetary || parseFloat(monetary) <= 0) {
